@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from 'react'
+import React, { useReducer } from 'react'
 
 const initialState = { contador: 0};
 
@@ -9,7 +9,6 @@ const init = (initalState) => {
 }
 
 
-//Tipos de acciones constantes
 const TYPES = {
     INCREMENT: "INCREMENT",
     INCREMENT_5: "INCREMENT_5",
@@ -19,35 +18,13 @@ const TYPES = {
 }
 
 
-//El atributo "type" del action define el tipo de accion que va a seguir dentro del switch.
-//El "payload" es el nuevo valor a manejar
-function reducer(state, action){
-    switch(action.type){
-        case TYPES.INCREMENT:
-            return { contador: state.contador + 1};
-        case TYPES.INCREMENT_5:
-            return { contador: state.contador + action.payload}
-        case TYPES.DECREMENT:
-            return { contador: state.contador - 1};
-        case TYPES.DECREMENT_5:
-            return { contador: state.contador - action.payload}
-        case TYPES.RESET:
-            return initialState
-        default:
-            return state;
-    }
-};
-
 const Contador = () => {
-    //const [contador, setContador] = useState(0);
     const [state, dispatch] = useReducer(reducer, initialState, init);
 
-    //const sumar = () => setContador(contador + 1);
     const sumar = () => dispatch({type: TYPES.INCREMENT});
 
     const sumar5 = () => dispatch({type: TYPES.INCREMENT_5, payload: 5})
 
-    //const restar = () => setContador(contador - 1);
     const restar = () => dispatch({type: TYPES.DECREMENT})
 
     const restar5 = () => dispatch({type: TYPES.DECREMENT_5, payload: 5});
@@ -69,4 +46,4 @@ const Contador = () => {
   )
 }
 
-export default Contador
+export default ContadorMejorado
