@@ -1,25 +1,11 @@
-import React, { useReducer } from 'react'
-
-const initialState = { contador: 0};
-
-const init = (initalState) => {
-    return {
-        contador: initialState.contador + 100
-    }
-}
-
-
-const TYPES = {
-    INCREMENT: "INCREMENT",
-    INCREMENT_5: "INCREMENT_5",
-    DECREMENT: "DECREMENT",
-    DECREMENT_5: "DECREMENT_5",
-    RESET: "RESET"
-}
-
+import React, { useReducer } from 'react';
+import { contadorReducer } from '../reducers/contadorReducer';
+import { contadorInit } from '../reducers/contadorReducer';
+import { contadorInitialState } from '../reducers/contadorReducer';
+import { TYPES } from '../actions/contadorActions';
 
 const Contador = () => {
-    const [state, dispatch] = useReducer(reducer, initialState, init);
+    const [state, dispatch] = useReducer(contadorReducer, contadorInitialState, contadorInit);
 
     const sumar = () => dispatch({type: TYPES.INCREMENT});
 

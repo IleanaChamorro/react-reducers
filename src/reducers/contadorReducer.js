@@ -1,3 +1,14 @@
+import { TYPES } from "../actions/contadorActions";
+
+export const contadorInitialState = { contador: 0};
+
+export const contadorInit = (initalState) => {
+    return {
+        contador: initialState.contador + 100
+    }
+}
+
+
 export function contadorReducer(state, action){
     switch(action.type){
         case TYPES.INCREMENT:
@@ -9,7 +20,7 @@ export function contadorReducer(state, action){
         case TYPES.DECREMENT_5:
             return { contador: state.contador - action.payload}
         case TYPES.RESET:
-            return initialState
+            return contadorInitialState
         default:
             return state;
     }
