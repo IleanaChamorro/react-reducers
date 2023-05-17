@@ -4,7 +4,7 @@ import { contadorInit } from '../reducers/contadorReducer';
 import { contadorInitialState } from '../reducers/contadorReducer';
 import { TYPES } from '../actions/contadorActions';
 
-const Contador = () => {
+const ContadorMejorado = () => {
     const [state, dispatch] = useReducer(contadorReducer, contadorInitialState, contadorInit);
 
     const sumar = () => dispatch({type: TYPES.INCREMENT});
