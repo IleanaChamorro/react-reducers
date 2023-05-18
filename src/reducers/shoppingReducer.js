@@ -13,7 +13,7 @@ export const shoppingInitalState = {
 };
 
 export function shoppingReducer(state, action){
-    switch (action) {
+    switch (action.type) {
         case TYPES.ADD_TO_CART:{
             //buscar id en lista de productos y guardarlo en una variable
             let newItem = state.products.find((product) => product.id === action.payload);
@@ -33,13 +33,28 @@ export function shoppingReducer(state, action){
             //Retornar el estado en la propiedad cart es igual al nuevo item 
         }
         case TYPES.REMOVE_ONE_FROM_CART:{
-            
+            //obtener producto en el carrito a eliminar 
+            let itemToDelete = state.cart.find(item => item.id === action.payload);
+
+            return itemToDelete.quantity > 1 
+            ? {
+                ...state,
+                cart: state.cart.map((item) =>
+                  item.id === action.payload
+                    ? { ...item, quantity: item.quantity - 1 }
+                    : item
+                ),
+              }
+            : {
+                ...state,
+                cart: state.cart.filter((item) => item.id !== action.payload),
+              };
         }
         case TYPES.REMOVE_ALL_FROM_CART:{
             
         }
         case TYPES.CLEAR_CART:{
-            
+            return shoppingInitalState;
         }
         default: 
             return state
