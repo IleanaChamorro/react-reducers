@@ -1,13 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { helpHttp } from "../helpers/helpHttp";
 import CrudForm from "./CrudForm";
 import CrudTable from "./CrudTable";
 import Loader from "./Loader";
 import Message from "./Message";
+import { crudIntialState, crudReducer } from "../reducers/crudReducer";
 
 const CrudApi = () => {
-  const [db, setDb] = useState(null);
+  //const [db, setDb] = useState(null);
+  const [state, dispatch] = useReducer(crudReducer, crudIntialState);
+  const {db} = state;
+  //Manejo de form para detectar nuevo registro o cuando es un dato a actualizar
   const [dataToEdit, setDataToEdit] = useState(null);
+  //variables que dependen de peticiones a api
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -31,6 +36,8 @@ const CrudApi = () => {
       });
   }, [url]);
 
+
+  //Métodos
   const createData = (data) => {
     data.id = Date.now();
     //console.log(data);
